@@ -1,0 +1,153 @@
+<style>
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-right: 20px;
+    font-weight: bold;
+    border-collapse: collapse;
+
+}
+th{
+    text-align: left;
+}
+select{
+        font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+h1 { text-transform: uppercase;}
+p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 35px;
+  margin-left: 0px;
+    font-size: 10px;
+}
+
+h2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+h4 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+
+h5 {
+  display: block;
+  font-size: .83em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+th {
+    alignment: left;
+    vertical-align: top;
+
+}
+td {
+    vertical-align: top;
+    horiz-align: left;
+}
+
+select#id_selected_fsps {
+    max-width: 200px;
+    min-width: 200px;
+
+}
+select#id_selected_rpu {
+    max-width: 200px;
+    min-width: 200px;
+
+}
+
+</style>
+
+<!doctype html>
+
+<html>
+<head>
+    <title>Vessel Routing App</title>
+</head>
+<body onload="onloadFunction()"><span style="color: black; ">
+
+<h2>Vessel Routing App</h2>
+    <br>
+
+
+
+{#    {% include 'navbar.html' %}#}
+
+    {% block content_section_1%}
+       This is where your child page content will appear
+    {%  endblock content_section_1 %}
+
+<br>
+<br>
+    <p>Currently logged in as {{ request.user.username }}</p>
+
+
+    </span>
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src ="{% static 'javascripts/viz.js' %}"></script>
+<script>
+    function onloadFunction() {
+      var text = "";
+      if (document.getElementById('id_test_label') !== null)
+      {
+            if (navigator.cookieEnabled == true)
+            {
+                text = "After page finished loading. Cookie option is checked. Cookies are enabled.";
+                testlabel = document.getElementById('id_test_label');
+                testlabel.innerText = text;
+            }
+            else
+            {
+                text = "After page finished loading. Cookie option is checked. Cookies are disabled.";
+                testlabel = document.getElementById('id_test_label');
+                testlabel.innerText = text
+            }
+
+      }
+      else
+      {
+          console.log('elementid id_test_label not loaded yet')
+      }
+
+      console.log('On load routine completed.')
+
+
+}
+
+
+
+</script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+
+    {% block javascript%}
+    {%  endblock javascript %}
+</body>
+</html>

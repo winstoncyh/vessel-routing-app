@@ -1,0 +1,18 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+    {% block content_section_1 %}
+    {{ createdflag }}
+    <form method="post">
+        {% csrf_token %}
+      <table>
+        {{ routingform }}
+
+      </table>
+        <input type="submit" value="Calculate">
+    dest_lon is {{ dest_lon }}
+    </form>
+
+                    <img src="{% static "savedplot.png" %}" alt="Optimal vessel route", height="80%">
+
+    {%  endblock content_section_1%}

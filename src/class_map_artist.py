@@ -231,13 +231,10 @@ class map_artist():
                 #region Check if edge is imaginary
                 if journey_track_node[1] == 180 and previous_journey_track_node[1] == -180:
                     imaginary_edge_flag = True
-                else:
-                    imaginary_edge_flag = False
 
-                if journey_track_node[1] == -180 and previous_journey_track_node[1] == 180:
+                elif journey_track_node[1] == -180 and previous_journey_track_node[1] == 180:
                     imaginary_edge_flag = True
-                else:
-                    imaginary_edge_flag = False
+
                 #endregion
 
                 # Annotate only non-imaginary edges
@@ -245,6 +242,8 @@ class map_artist():
                     self.ax.annotate('', xy=linestring_tuple_to, xytext=linestring_tuple_from,
                                               arrowprops=dict(arrowstyle="simple", facecolor=rgb_tuple,
                                                               edgecolor=rgb_tuple,linestyle='--'),transform=ccrs.Geodetic())
+                else:
+                    imaginary_edge_flag = False
 
 
             # Running within for loop to keep a T-1 node

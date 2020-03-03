@@ -119,31 +119,17 @@ class Vessel_Coordinator():
         if cost is None:
             print('Solution not found by routing algorithm, please check log for details of routing error.')
             self.my_time_keeper.stop_timing_event(event_name='Vessel routing optimization operation')
+            journey_track = self.generate_journey_track(start_node, end_node, came_from_list)
+
             exit()
         else:
             print('Optimized shortest route distance using Dijkstra Algorithm is :' + "{:,}".format(round(cost, 0)) + ' km')
+            journey_track = self.generate_journey_track(start_node, end_node, came_from_list)
 
         # endregion
 
         # region Output routing results
-
-        # Create journey complete flag
-        journey_complete = False
-
-        # Populate the track beginning from the end node, find the previous node, and chain them up
-        journey_track = [end_node]
-
-        while journey_complete == False:
-            previous_node = came_from_list[end_node]
-            journey_track += [previous_node]
-            # Once you work backwards and hit the start node, the track is completed
-            if previous_node == start_node:
-                journey_complete = True
-            else:
-                end_node = previous_node
-        # Reverse the list to show track from start node to end node
-        journey_track.reverse()
-        print('Optimal Track:' + (str(journey_track)))
+        print('Best route found:' + (str(journey_track)))
 
         # Returns an ordered list of latlon points
         return journey_track
@@ -166,3 +152,23 @@ class Vessel_Coordinator():
 
         print('Vessel coordinator added '+canal_name+' edges to list of sea mesh edges during its init.')
         #endregion
+
+    def generate_journey_track(self,start_node,end_node,came_from_list):
+        # Create journey complete flag
+        journey_complete = False
+
+        # Populate the track beginning from the end node, find the previous node, and chain them up
+        journey_track = [end_node]
+
+        while journey_complete == False:
+            previous_node = came_from_list[end_node]
+            journey_track += [previous_node]
+            # Once you work backwards and hit the start node, the track is completed
+            if previous_node == start_node:
+                journey_complete = True
+            else:
+                end_node = previous_node
+        # Reverse the list to show track from start node to end node
+        journey_track.reverse()
+
+        return journey_track

@@ -13,15 +13,15 @@ cartopy.config['pre_existing_data_dir ']='\\cache'
 
 # region Initial parameters
 my_time_keeper = tk.timekeeper()
-grid_block_size_degrees = 30
+grid_block_size_degrees = 5
 scriptfilepath = common.get_calling_script_directory_path(sys)
 logFilePath = scriptfilepath + r'\geometric_operation_log.txt'
 vc_pickle_file = scriptfilepath + r'\\cache\\vc_'+ str(grid_block_size_degrees) + '_degree.pickle'
 
 # Configure cache parameters
-recreate_cache = True
-save_vc = True
-load_vc_from_file = False
+recreate_cache = False
+save_vc = False
+load_vc_from_file = True
 
 
 #endregion
@@ -68,12 +68,13 @@ if __name__ == '__main__':
 
     my_time_keeper.stop_timing_event(event_name='main')
 
-    vessel_optimized_track = my_vc.get_optimal_route((30,-70),(0,85))
+    vessel_optimized_track, exit_code = my_vc.get_optimal_route((-15,-36),(40,6))
+    print(exit_code)
     my_vc.my_map_artist.plot_vessel_track(vessel_optimized_track,'C Valentine')
-    vessel_optimized_track = my_vc.get_optimal_route((20, 140), (-20, -90))
-    my_vc.my_map_artist.plot_vessel_track(vessel_optimized_track, 'Minerva Pisces')
-    vessel_optimized_track = my_vc.get_optimal_route((0, 85), (44, 156))
-    my_vc.my_map_artist.plot_vessel_track(vessel_optimized_track, 'Long Island')
-    my_vc.my_map_artist.save_plot(scriptfilepath + r'/vessel-route.png')
+    # vessel_optimized_track = my_vc.get_optimal_route((20, 140), (-20, -90))
+    # my_vc.my_map_artist.plot_vessel_track(vessel_optimized_track, 'Minerva Pisces')
+    # vessel_optimized_track = my_vc.get_optimal_route((0, 85), (44, 156))
+    # my_vc.my_map_artist.plot_vessel_track(vessel_optimized_track, 'Long Island')
+    # my_vc.my_map_artist.save_plot(scriptfilepath + r'/vessel-route.png')
     my_vc.my_map_artist.display()
 

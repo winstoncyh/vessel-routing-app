@@ -12,6 +12,10 @@
         <input type="submit" value="Calculate">
 
     </form>
+        Note: exit_code is {{ exit_code }}
+        {% if exit_code == 1 %}
+            <p>Solution not found by routing algorithm. Please check your coordinates. Below results could be wildly inaccurate.</p>
+        {% endif %}
 
                     <img src="{% static "savedplot.png" %}" alt="Optimal vessel route", height="80%">
 

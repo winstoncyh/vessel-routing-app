@@ -19,6 +19,7 @@ vc_pickle_file = scriptfilepath + r'\cache\vc_0.5_degree.pickle'
 
 
 def home_view(request):
+    display_no_route_message = False
 
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -39,11 +40,11 @@ def home_view(request):
             dest_lon_float = float(dest_lon)
 
             my_vc = onload_func.onload()
-            vessel_optimized_track = my_vc.get_optimal_route((origin_lat_float, origin_lon_float), (dest_lat_float, dest_lon_float))
+            vessel_optimized_track, exit_code = my_vc.get_optimal_route((origin_lat_float, origin_lon_float), (dest_lat_float, dest_lon_float))
             my_vc.my_map_artist.plot_vessel_track(vessel_optimized_track, 'Vessel')
             my_vc.my_map_artist.save_plot('savedplot.png')
 
-            return render(request, 'home.html', {'routingform': form})
+            return render(request, 'home.html', {'routingform': form,'exit_code': exit_code})
 
     # if a GET (or any other method) we'll create a blank form
     else:
